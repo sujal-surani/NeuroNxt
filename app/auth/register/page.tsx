@@ -62,10 +62,10 @@ export default function RegisterPage() {
 
   const handleValidateInstituteCode = async () => {
     const code = formData.instituteCode.trim().toUpperCase()
-    const pattern = /^[A-Z0-9]{2,}(?:-[A-Z0-9]{2,})*$/
+    const pattern = /^[A-Z0-9-_]{2,}$/
     if (!pattern.test(code)) {
       setInstituteValidation("invalid")
-      setInstituteError("Enter a valid Institute/College/University Code (use uppercase letters, numbers, dashes)")
+      setInstituteError("Enter a valid Institute Code (uppercase letters, numbers, dashes, underscores)")
       return
     }
 
@@ -89,7 +89,7 @@ export default function RegisterPage() {
     e.preventDefault()
 
     // Validate institute code format
-    const instituteCodePattern = /^[A-Z0-9]{2,}(?:-[A-Z0-9]{2,})*$/
+    const instituteCodePattern = /^[A-Z0-9-_]{2,}$/
     if (!instituteCodePattern.test(formData.instituteCode.trim())) {
       toast.error("Enter a valid Institute Code")
       return
@@ -215,8 +215,8 @@ export default function RegisterPage() {
                     onChange={(e) => handleInputChange("instituteCode", e.target.value.toUpperCase())}
                     className="pl-10"
                     required
-                    pattern="[A-Z0-9]{2,}(?:-[A-Z0-9]{2,})*"
-                    title="Use uppercase letters, numbers, and dashes only"
+                    pattern="[A-Z0-9-_]{2,}"
+                    title="Use uppercase letters, numbers, dashes, and underscores only"
                     disabled={isLoading}
                   />
                 </div>
